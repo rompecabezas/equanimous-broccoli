@@ -1,0 +1,9 @@
+{
+  "name": "com.creepypastas.equanimous-broccoli",
+  "version": "0.1.1",
+  "description": "This is server.",
+  "dependencies": {
+    "express": "4.10.2",
+    "socket.io": "1.2.0"
+  }
+}
