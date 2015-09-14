@@ -1,4 +1,4 @@
-var io = require('socket.io').listen(5647);
+var io = require('socket.io').listen(9192);
 io.on('connection', function(socket){
   console.log('user connected');
 
