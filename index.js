@@ -19,16 +19,15 @@ io.on('connection', function(socket){
     console.log(msg);
 
     if(msg.rcplace == "df" ){
-      console.log("oh yeah");
+      if(false == insertRows(name,email)){
+        console.log("bad email or bad name");
+      }
+      else {
+        console.log("oh, yeah");
+      }
     }
     else{
       console.log("nope");
-    }
-
-    if(validator.isEmail(msg.user.email)){
-      if(validator.isAlphanumeric(msg.user.name)){
-          insertRows(name,email);
-      }
     }
 
     socket.emit('user::responses', {
@@ -64,6 +63,10 @@ function createTable() {
 }
 
 function insertRows(name, email) {
+
+  if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
+   return false;
+  }
 
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
