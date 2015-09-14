@@ -85,7 +85,7 @@ function readAllRows() {
         rows.forEach(function (row) {
             console.log(row.id + ": " + row.name + ";" + row.email);
             global.registredusers++;
-            console.log("REG" : global.registredusers)
+            console.log("REG: " + global.registredusers)
         });
 //        closeDb();
     });
