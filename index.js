@@ -18,7 +18,7 @@ io.on('connection', function(socket){
   socket.on('user::responses', function(msg){
     console.log(msg);
     var inserted = true;
-    var data = {}
+    var data = {};
 
     if(false == insertRows(msg.user.name,msg.user.email)){
       data.error = 'Bad username or bad email';
