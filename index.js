@@ -17,22 +17,20 @@ io.on('connection', function(socket){
 
   socket.on('user::responses', function(msg){
     console.log(msg);
+    var inserted = true;
+    var data = {}
 
-    if(msg.rcplace == "df" ){
-      if(false == insertRows(msg.user.name,msg.user.email)){
-        console.log("bad email or bad name");
-      }
-      else {
-        console.log("oh, yeah");
-      }
-    }
-    else{
-      console.log("nope");
+    if(false == insertRows(msg.user.name,msg.user.email){
+      data.error = 'Bad username or bad email';
+      data.errorCode = 403;
+    }else {
+      data.success = 'success';
+      data.code = 200;
+      data.message = 'Thank you!',
     }
 
-    socket.emit('user::responses', {
-      message: 'Received. We\'ll announce the winner on September 17 at our facebook fanpage: https://www.faceboko.com/creepypastas.'
-    });
+
+    socket.emit('user::responses', data);
   });
 
   socket.on('disconnect', function(){
