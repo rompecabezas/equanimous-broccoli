@@ -93,6 +93,14 @@ function readAllRows() {
     return registredusers;
 }
 
+function countAllRows(){
+  console.log("count users");
+  var registredusers = db.query("SELECT COALESCE(MAX(id)+1, 0) FROM users");
+
+  console.log(registredusers + "registred users");
+  return registredusers;
+}
+
 function closeDb() {
     console.log("closeDb");
     db.close();
