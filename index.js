@@ -58,8 +58,8 @@ function createTable() {
 function insertRows(name, email) {
 
     console.log("insert new user");
-    var stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
-        stmt.run(" '',mau, mauricio@navarromiranda.mx");
+    var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
+        stmt.run("mau, mauricio@navarromiranda.mx");
     stmt.finalize(readAllRows);
 }
 
