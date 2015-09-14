@@ -65,7 +65,7 @@ function insertRows(name, email) {
 
 function readAllRows() {
     console.log("readAllRows users");
-    db.all("SELECT rowid AS id, name, email FROM users", function(err, rows) {
+    db.all("SELECT rowid, id, name, email FROM users", function(err, rows) {
         rows.forEach(function (row) {
             console.log(row.id + ": " + row.name + ", " + row.email);
         });
