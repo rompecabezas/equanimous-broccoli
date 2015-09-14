@@ -19,13 +19,21 @@ io.on('connection', function(socket){
     console.log(msg);
     var inserted = true;
     var data = {};
+    var registredusers = 0;
+    var somethingIsWrong = false;
 
-    var registredusers = insertRows(msg.user.name,msg.user.email)
+    if( !validator.isEmail(email) || !validator.isAlphanumeric(name)){
+      somethingIsWrong = true;
+    }else{
+      insertRows(msg.user.name,msg.user.email);
+    }
 
-    if(!registredusers){
+    if(somethingIsWrong){
       data.error = 'Bad username or bad email';
       data.errorCode = 403;
     }else {
+      registredusers = readAllRows();
+      
       data.success = 'success';
       data.code = 200;
       data.message = 'Thank you!';
@@ -64,11 +72,6 @@ function createTable() {
 }
 
 function insertRows(name, email) {
-
-  if( !validator.isEmail(email) || !validator.isAlphanumeric(name)){
-   return false;
-  }
-
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
         stmt.run(name, email);
