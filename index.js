@@ -1,6 +1,7 @@
 var io = require('socket.io').listen(9129);
 var validator = require('validator');
 var peopleOnline = 0;
+global registredusers = 0;
 
 
 
@@ -19,7 +20,7 @@ io.on('connection', function(socket){
     console.log(msg);
     var inserted = true;
     var data = {};
-    var registredusers = 0;
+    registredusers = 0;
     var somethingIsWrong = false;
 
     if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
@@ -32,7 +33,6 @@ io.on('connection', function(socket){
       data.error = 'Bad username or bad email';
       data.errorCode = 403;
     }else {
-      registredusers = countAllRows();
 
       data.success = 'success';
       data.code = 200;
@@ -81,7 +81,7 @@ function insertRows(name, email) {
 }
 
 function readAllRows() {
-  var registredusers = 0;
+    registredusers = 0;
     console.log("readAllRows users");
     db.all("SELECT rowid AS id, name, email FROM users", function(err, rows) {
         rows.forEach(function (row) {
@@ -90,7 +90,6 @@ function readAllRows() {
         });
 //        closeDb();
     });
-    return registredusers;
 }
 
 function countAllRows(){
