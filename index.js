@@ -15,8 +15,16 @@ io.on('connection', function(socket){
 
   socket.on('user::responses', function(msg){
     console.log(msg);
+
+    if(msg.rplace == "DF" ){
+      console.log("oh yeah");
+    }
+    else{
+      console.log("nope");
+    }
+
     socket.emit('user::responses', {
-      message: 'I have no idea how to save user responses, yet.'
+      message: 'Received. We\'ll announce the winner on September 17 at our facebook fanpage: https://www.faceboko.com/creepypastas.'
     });
   });
 
