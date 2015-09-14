@@ -22,7 +22,7 @@ io.on('connection', function(socket){
     var registredusers = 0;
     var somethingIsWrong = false;
 
-    if( !validator.isEmail(email) || !validator.isAlphanumeric(name)){
+    if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
       somethingIsWrong = true;
     }else{
       insertRows(msg.user.name,msg.user.email);
@@ -33,7 +33,7 @@ io.on('connection', function(socket){
       data.errorCode = 403;
     }else {
       registredusers = readAllRows();
-      
+
       data.success = 'success';
       data.code = 200;
       data.message = 'Thank you!';
