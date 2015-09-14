@@ -32,7 +32,7 @@ io.on('connection', function(socket){
       data.error = 'Bad username or bad email';
       data.errorCode = 403;
     }else {
-      registredusers = readAllRows();
+      registredusers = countAllRows();
 
       data.success = 'success';
       data.code = 200;
