@@ -19,7 +19,7 @@ io.on('connection', function(socket){
     console.log(msg);
 
     if(msg.rcplace == "df" ){
-      if(false == insertRows(name,email)){
+      if(false == insertRows(msg.user.name,msg.user.email)){
         console.log("bad email or bad name");
       }
       else {
