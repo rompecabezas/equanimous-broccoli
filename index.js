@@ -1,6 +1,6 @@
 var io = require('socket.io').listen(9129);
 var numPlayers = 0;
-var usersOnline = 0;
+var peopleOnline = 0;
 
 io.on('connection', function(socket){
   console.log('user connected');
@@ -9,7 +9,7 @@ io.on('connection', function(socket){
   socket.on('user::arrives', function(msg){
     console.log(msg);
     io.emit('user::arrives', {
-      usersOnline: usersOnline
+      peopleOnline: peopleOnline
     });
   });
 
