@@ -98,7 +98,7 @@ function countAllRows(){
   var registredusers = db.run("SELECT COALESCE(MAX(rowid)+1, 0) FROM users");
 
   console.log(registredusers + "registred users");
-  return registredusers;
+  return registredusers.toString();
 }
 
 function closeDb() {
