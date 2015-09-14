@@ -72,7 +72,9 @@ function insertRows(name, email) {
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
         stmt.run(name, email);
-    stmt.finalize(readAllRows);
+        //stmt.finalize(readAllRows);
+        stmt.finalize();
+        return readAllRows();
 }
 
 function readAllRows() {
