@@ -20,7 +20,6 @@ io.on('connection', function(socket){
     console.log(msg);
     var inserted = true;
     var data = {};
-    global.registredusers = 0;
     var somethingIsWrong = false;
 
     if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
@@ -77,18 +76,16 @@ function insertRows(name, email) {
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
         stmt.run(name, email);
-        //stmt.finalize(readAllRows);
-        stmt.finalize();
-        return readAllRows();
+        stmt.finalize(readAllRows);
 }
 
 function readAllRows() {
-    global.registredusers = 0;
     console.log("readAllRows users");
     db.all("SELECT rowid AS id, name, email FROM users", function(err, rows) {
         rows.forEach(function (row) {
             console.log(row.id + ": " + row.name + ";" + row.email);
             global.registredusers++;
+            console.log("REG" : global.registredusers)
         });
 //        closeDb();
     });
