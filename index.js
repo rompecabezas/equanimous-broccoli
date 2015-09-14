@@ -20,7 +20,7 @@ io.on('connection', function(socket){
     var inserted = true;
     var data = {}
 
-    if(false == insertRows(msg.user.name,msg.user.email){
+    if(false == insertRows(msg.user.name,msg.user.email)){
       data.error = 'Bad username or bad email';
       data.errorCode = 403;
     }else {
