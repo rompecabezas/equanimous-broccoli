@@ -21,3 +21,11 @@ io.on('connection', function(socket){
   });
 
 });
+
+
+io.on('disconnect', function () {
+      --peopleOnline;
+      socket.broadcast.emit('user::left', {
+        peopleOnline: peopleOnline
+      });
+});
