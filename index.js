@@ -4,7 +4,7 @@ var peopleOnline = 0;
 
 io.on('connection', function(socket){
   console.log('user connected');
-  usersOnline++;
+  peopleOnline++;
 
   socket.on('user::arrives', function(msg){
     console.log(msg);
