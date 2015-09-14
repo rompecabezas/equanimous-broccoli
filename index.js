@@ -59,7 +59,7 @@ function insertRows(name, email) {
 
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
-        stmt.run(",mau, mauricio@navarromiranda.mx");
+        stmt.run(" '',mau, mauricio@navarromiranda.mx");
     stmt.finalize(readAllRows);
 }
 
