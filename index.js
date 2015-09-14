@@ -1,6 +1,8 @@
 var io = require('socket.io').listen(9129);
-var numPlayers = 0;
+var validator = require('validator');
 var peopleOnline = 0;
+
+
 
 io.on('connection', function(socket){
   console.log('user connected');
@@ -21,6 +23,12 @@ io.on('connection', function(socket){
     }
     else{
       console.log("nope");
+    }
+
+    if(validator.isEmail(msg.user.email)){
+      if(validator.isAlphanumeric(msg.user.name)){
+          insertRows(name,email);
+      }
     }
 
     socket.emit('user::responses', {
@@ -59,7 +67,7 @@ function insertRows(name, email) {
 
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
-        stmt.run("mau", "mauricio@navarromiranda.mx");
+        stmt.run(name, email);
     stmt.finalize(readAllRows);
 }
 
@@ -69,7 +77,7 @@ function readAllRows() {
         rows.forEach(function (row) {
             console.log(row.id + ": " + row.name + ";" + row.email);
         });
-        closeDb();
+//        closeDb();
     });
 }
 
