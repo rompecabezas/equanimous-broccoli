@@ -15,7 +15,7 @@ io.on('connection', function(socket){
 
   socket.on('user::responses', function(msg){
     console.log(msg);
-    io.emit('user::responses', {
+    socket.emit('user::responses', {
       message: 'I have no idea how to save user responses, yet.'
     });
   });
