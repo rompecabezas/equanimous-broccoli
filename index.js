@@ -97,8 +97,8 @@ function countAllRows(){
   console.log("count users");
 //  var registredusers = db.run("SELECT COALESCE(MAX(rowid)+1, 0) FROM users");
   var registredusers = db.run("SELECT COUNT(DISTINCT email) AS NumberOfUsers FROM users");
-  registredusers = registredusers.rows || '23';
   console.log(registredusers.toString() + "registred users");
+  registredusers = registredusers.rows || '23';
   return registredusers.toString();
 }
 
