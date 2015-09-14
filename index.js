@@ -1,11 +1,15 @@
 var io = require('socket.io').listen(9129);
+var numPlayers = 0;
+var usersOnline = 0;
+
 io.on('connection', function(socket){
   console.log('user connected');
+  usersOnline++;
 
   socket.on('user::arrives', function(msg){
     console.log(msg);
     io.emit('user::arrives', {
-      message: 'I have no idea how to welcome user, yet.'
+      usersOnline: usersOnline
     });
   });
 
