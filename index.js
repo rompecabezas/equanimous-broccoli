@@ -34,6 +34,8 @@ io.on('connection', function(socket){
       data.errorCode = 403;
     }else {
 
+      console.log(global.registredusers);
+
       data.success = 'success';
       data.code = 200;
       data.message = 'Thank you!';
