@@ -82,4 +82,4 @@ function initDB() {
     openDB();
 }
 
-runChainExample();
+initDB();
