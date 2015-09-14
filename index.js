@@ -20,13 +20,16 @@ io.on('connection', function(socket){
     var inserted = true;
     var data = {};
 
-    if(false == insertRows(msg.user.name,msg.user.email)){
+    var registredusers = insertRows(msg.user.name,msg.user.email)
+
+    if(!registredusers){
       data.error = 'Bad username or bad email';
       data.errorCode = 403;
     }else {
       data.success = 'success';
       data.code = 200;
       data.message = 'Thank you!';
+      data.registredusers = registredusers;
     }
 
 
@@ -73,13 +76,16 @@ function insertRows(name, email) {
 }
 
 function readAllRows() {
+  var registredusers = 0;
     console.log("readAllRows users");
     db.all("SELECT rowid AS id, name, email FROM users", function(err, rows) {
         rows.forEach(function (row) {
             console.log(row.id + ": " + row.name + ";" + row.email);
+            registredusers++;
         });
 //        closeDb();
     });
+    return registredusers;
 }
 
 function closeDb() {
