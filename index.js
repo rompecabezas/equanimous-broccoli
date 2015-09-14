@@ -64,7 +64,7 @@ function createTable() {
 
 function insertRows(name, email) {
 
-  if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
+  if( !validator.isEmail(email) || !validator.isAlphanumeric(name)){
    return false;
   }
 
