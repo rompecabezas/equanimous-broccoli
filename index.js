@@ -16,7 +16,7 @@ io.on('connection', function(socket){
   socket.on('user::responses', function(msg){
     console.log(msg);
 
-    if(msg.rplace == "df" ){
+    if(msg.rcplace == "df" ){
       console.log("oh yeah");
     }
     else{
