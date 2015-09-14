@@ -20,13 +20,12 @@ io.on('connection', function(socket){
     });
   });
 
-});
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+    --peopleOnline;
+    io.emit('user::left', {
+      peopleOnline: peopleOnline
+    });
+  });
 
-
-io.on('disconnect', function () {
-      console.log('user disconnected');
-      --peopleOnline;
-      socket.broadcast.emit('user::left', {
-        peopleOnline: peopleOnline
-      });
 });
