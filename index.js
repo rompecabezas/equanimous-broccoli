@@ -24,6 +24,7 @@ io.on('connection', function(socket){
 
 
 io.on('disconnect', function () {
+      console.log('user disconnected');
       --peopleOnline;
       socket.broadcast.emit('user::left', {
         peopleOnline: peopleOnline
