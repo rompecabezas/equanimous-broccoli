@@ -2,7 +2,7 @@ var io = require('socket.io').listen(9129);
 var validator = require('validator');
 var peopleOnline = 0;
 global.registredusers = 0;
-
+global.alphaChars = "1234567890 -_q'azwsxedcrfvtgbyhnujmikolpñQAZWSXEDCRFVTGBYHNUJMIKOLPÑáéíóúÁÉÍÓÚ";
 
 
 io.on('connection', function(socket){
@@ -23,23 +23,30 @@ io.on('connection', function(socket){
     var data = {};
     var somethingIsWrong = false;
 
-    if( !validator.isEmail(msg.user.email) || !validator.isAlphanumeric(msg.user.name)){
+    msg.user.email = validator.trim(msg.user.email);
+    msg.user.name = validator.whitelist(msg.user.name,global.alphaChars);
+    msg.user.name = validator.trim(msg.user.name);
+
+    if( !validator.isEmail(msg.user.email) ){
       somethingIsWrong = true;
-    }else{
-      insertRows(msg.user.name,msg.user.email);
+      data.error = 'Bad email';
+      data.errorCode = 1503;
+      data.registredusers = global.registredusers;
+    }
+    if(msg.user.name == '' || msg.user.name == ' '){
+      somethingIsWrong = true;
+      data.error = 'Bad name';
+      data.errorCode = 1403;
+      data.registredusers = global.registredusers;
     }
 
-    if(somethingIsWrong){
-      data.error = 'Bad username or bad email';
-      data.errorCode = 403;
-    }else {
-
-      console.log("REG:" + global.registredusers);
-
+    if(!somethingIsWrong){
+      insertRows(msg.user.name,msg.user.email);
       data.success = 'success';
       data.code = 200;
       data.message = 'Thank you!';
-      data.registredusers = global.registredusers;
+      data.registredusers = global.registredusers++;
+      console.log("REG:" + global.registredusers);
     }
 
 
@@ -77,7 +84,8 @@ function insertRows(name, email) {
     console.log("insert new user");
     var stmt = db.prepare("INSERT INTO users (name, email) VALUES (?, ?)");
         stmt.run(name, email);
-        stmt.finalize(readAllRows);
+        //stmt.finalize(readAllRows);
+        stmt.finalize();
 }
 
 function readAllRows() {
