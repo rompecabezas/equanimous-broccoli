@@ -33,6 +33,13 @@ io.on('connection', function(socket){
       data.errorCode = 1503;
       data.registredusers = global.registredusers;
     }
+    
+    if(msg.user.email == ''){
+      data.error = 'Empty email';
+      data.errorCode = 1603;
+      data.registredusers = global.registredusers;
+    }
+
     if(msg.user.name == '' || msg.user.name == ' '){
       somethingIsWrong = true;
       data.error = 'Bad name';
