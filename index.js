@@ -12,7 +12,8 @@ io.on('connection', function(socket){
   socket.on('user::arrives', function(msg){
     console.log(msg);
     io.emit('user::arrives', {
-      peopleOnline: peopleOnline
+      peopleOnline: peopleOnline,
+      registredusers: global.registredusers
     });
   });
 
