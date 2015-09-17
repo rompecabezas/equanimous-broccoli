@@ -1,7 +1,7 @@
 var io = require('socket.io').listen(9129);
 var validator = require('validator');
 var peopleOnline = 0;
-global.registredusers = 0;
+global.registredusers = 720;
 global.alphaChars = "1234567890 -_q'azwsxedcrfvtgbyhnujmikolpñQAZWSXEDCRFVTGBYHNUJMIKOLPÑáéíóúÁÉÍÓÚ";
 
 
@@ -33,7 +33,7 @@ io.on('connection', function(socket){
       data.errorCode = 1503;
       data.registredusers = global.registredusers;
     }
-    
+
     if(msg.user.email == ''){
       data.error = 'Empty email';
       data.errorCode = 1603;
@@ -55,6 +55,12 @@ io.on('connection', function(socket){
       data.registredusers = global.registredusers++;
       console.log("REG:" + global.registredusers);
     }
+
+
+    somethingIsWrong = true;
+    data.error = 'Closed';
+    data.errorCode = 1999;
+    data.registredusers = global.registredusers;
 
 
     socket.emit('user::responses', data);
